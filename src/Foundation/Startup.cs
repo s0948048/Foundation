@@ -26,6 +26,7 @@ using Geta.NotFoundHandler.Optimizely.Infrastructure.Configuration;
 using Geta.Optimizely.Categories.Configuration;
 using Geta.Optimizely.Categories.Find.Infrastructure.Initialization;
 using Geta.Optimizely.Categories.Infrastructure.Initialization;
+using Infrastructure.Commerce.Extensions;
 using Mediachase.Commerce.Anonymous;
 using Mediachase.Commerce.Orders;
 using Microsoft.AspNetCore.Builder;
@@ -278,7 +279,9 @@ namespace Foundation
             app.UseCors();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseAnonymousCartMerging();
+            app.UseMiddleware<AnonymousIdFeature>();
+            app.UseMiddleware<AnonymousCartMergingMiddleware>();
+            //app.UseAnonymousCartMerging();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(name: "Default", pattern: "{controller}/{action}/{id?}");

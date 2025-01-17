@@ -33,6 +33,7 @@ namespace Foundation.Features.Search.Category
                 viewModel.ViewSwitcher = string.IsNullOrEmpty(currentContent.DefaultTemplate) ? "Grid" : currentContent.DefaultTemplate;
             }
 
+            // create searchviewmodel with filteroptions, and so on..
             var model = _viewModelFactory.Create(currentContent,
                 _httpContextAccessor.HttpContext.Request.Query["facets"].ToString(),
                 0,
